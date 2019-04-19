@@ -1,0 +1,14 @@
+.profile-pic-chooser {
+  position: relative;
+  margin-bottom: 8px;
+}
+.profile-pic img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+}
+.pic-chooser {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
