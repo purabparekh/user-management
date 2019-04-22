@@ -4,6 +4,8 @@ import Layout from "../layout/Layout";
 import PageNotFound from "../components/common/PageNotFound";
 import Unauthorized from "../components/common/Unauthorized";
 
+export const appBaseURL = "/user-management";
+
 export const appRoutes = [
   {
     path: "/login",

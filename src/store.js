@@ -7,7 +7,7 @@ import { users } from "./services/UserService";
 
 export const INITIAL_STATE = {
   users,
-  loggedInUser: users[1]
+  loggedInUser: users[0]
 };
 
 // const rootReducer = combineReducers({ userReducer });

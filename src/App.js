@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import RouterOutlet from "./components/common/RouterOutlet";
-import { appRoutes, pageNotFound } from "./routes/appRoutes";
+import { appBaseURL, appRoutes, pageNotFound } from "./routes/appRoutes";
 
 class App extends Component {
   render() {
     return (
-      <Router>
+      <Router basename={appBaseURL}>
         <RouterOutlet routes={appRoutes} pageNotFound={pageNotFound} />
       </Router>
     );
