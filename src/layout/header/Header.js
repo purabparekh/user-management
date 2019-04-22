@@ -15,7 +15,14 @@ import Menu from "@material-ui/core/Menu";
 
 import logo from "../../assets/ic_logo_login.png";
 
+import { withRouter } from "react-router-dom";
+
+import { logout } from "../../actions/session/sessionActions";
+
+// import history from "../../history.js";
+
 import { connect } from "react-redux";
+// import { Redirect } from "react-router/cjs/react-router";
 
 const useStyles = makeStyles({
   grow: {
@@ -33,6 +40,13 @@ const Header = props => {
 
   function handleClose() {
     setAnchorEl(null);
+  }
+
+  function logout() {
+    handleClose();
+    props.history.push("/login");
+    props.logout();
+    // return <Redirect to="/login" />;
   }
 
   const { classes, isDrawerOpen, loggedInUser } = props;
@@ -78,7 +92,7 @@ const Header = props => {
             onClose={handleClose}
           >
             {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-            <MenuItem onClick={handleClose}>Log out</MenuItem>
+            <MenuItem onClick={logout}>Log out</MenuItem>
           </Menu>
         </div>
       </Toolbar>
@@ -89,7 +103,16 @@ const Header = props => {
 // export default Header;
 
 const mapStateToProps = state => ({
-  ...state
+  loggedInUser: state.sessionReducer
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  logout: payload => dispatch(logout(payload))
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Header)
+);

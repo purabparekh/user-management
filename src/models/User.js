@@ -4,6 +4,7 @@ export default class User {
   static DEFAULTS = {
     id: -1,
     username: "",
+    password: "",
     firstName: "",
     lastName: "",
     thumbnailUrl: "",
@@ -15,6 +16,7 @@ export default class User {
     {
       id,
       username,
+      password,
       firstName,
       lastName,
       thumbnailUrl,
@@ -25,6 +27,7 @@ export default class User {
   ) {
     this.id = id;
     this.username = username;
+    this.password = password;
     this.firstName = firstName;
     this.lastName = lastName;
     this.thumbnailUrl = thumbnailUrl;

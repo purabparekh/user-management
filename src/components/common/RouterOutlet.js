@@ -57,8 +57,10 @@ class RouterOutlet extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  ...state
-});
+const mapStateToProps = state => () => {
+  return {
+    loggedInUser: state.sessionReducer
+  };
+};
 
 export default connect(mapStateToProps)(RouterOutlet);

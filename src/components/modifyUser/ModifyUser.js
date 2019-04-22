@@ -12,12 +12,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import InputLabel from "@material-ui/core/InputLabel";
 
 import { ROLES } from "../../constants/roles";
+import { defaultImageUrl } from "../../services/UserService";
 
 import "./modifyUser.css";
 import ProfilePic from "../common/ProfilePic";
 
 class ModifyUser extends Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       user: this.props.user,
@@ -56,8 +58,7 @@ class ModifyUser extends Component {
           <Grid container spacing={24}>
             <Grid item xs={6}>
               <ProfilePic
-                // src={user.thumbnailUrl || "https://picsum.photos/200?random"}
-                src={user.thumbnailUrl || "http://lorempixel.com/200/200/"}
+                src={user.thumbnailUrl || defaultImageUrl}
                 displayPicChooser
                 onChange={this.handleImageUpload}
               />

@@ -4,7 +4,9 @@ import addUser from "./addUser";
 import updateUser from "./updateUser";
 import deleteUser from "./deleteUser";
 
-export default (state, action) => {
+import { users } from "../../services/UserService";
+
+export default (state = users, action) => {
   switch (action.type) {
     case USER_ACTION_TYPES.ADD_USER:
       return addUser(state, action);

@@ -235,7 +235,7 @@ class UserList extends Component {
 // export default UserList;
 
 const mapStateToProps = state => ({
-  ...state
+  users: state.userReducer
 });
 
 const mapDispatchToProps = dispatch => ({
