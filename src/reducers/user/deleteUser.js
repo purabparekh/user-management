@@ -4,7 +4,7 @@ export default (state = [], action) => {
   switch (action.type) {
     case USER_ACTION_TYPES.DELETE_USER:
       const userToDelete = action.payload;
-      return state.users.filter(user => user.id !== userToDelete.id);
+      return state.filter(user => user.id !== userToDelete.id);
     default:
       return state;
   }

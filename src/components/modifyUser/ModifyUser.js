@@ -19,7 +19,6 @@ import ProfilePic from "../common/ProfilePic";
 
 class ModifyUser extends Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       user: this.props.user,

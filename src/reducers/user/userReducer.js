@@ -1,5 +1,6 @@
 import USER_ACTION_TYPES from "../../actions/user/actionTypes/actionTypes";
 
+import getUsers from "./getUsers";
 import addUser from "./addUser";
 import updateUser from "./updateUser";
 import deleteUser from "./deleteUser";
@@ -8,6 +9,13 @@ import { users } from "../../services/UserService";
 
 export default (state = users, action) => {
   switch (action.type) {
+    // case USER_ACTION_TYPES.GET_USERS:
+    //   return getUsers(state, action);
+    case USER_ACTION_TYPES.GET_USERS_STARTED:
+    case USER_ACTION_TYPES.GET_USERS_SUCCESS:
+    case USER_ACTION_TYPES.GET_USERS_FAILURE:
+      return getUsers(state, action);
+
     case USER_ACTION_TYPES.ADD_USER:
       return addUser(state, action);
     case USER_ACTION_TYPES.UPDATE_USER:

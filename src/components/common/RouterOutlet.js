@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
 import { Route, Switch } from "react-router-dom";
+import isEqual from "lodash/isEqual";
 
-import { connect } from "react-redux";
+// import { connect } from "react-redux";
+import store from "../../store";
 
 const AUTHENTICATION_RESULTS = {
   VALID: "Valid",
@@ -10,8 +12,30 @@ const AUTHENTICATION_RESULTS = {
   REDIRECT_TO_UNAUTHORIZED: "RedirectToUnauthorized"
 };
 class RouterOutlet extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedInUser: store.getState().sessionReducer
+    };
+  }
+  unsubscribe = null;
+  componentDidMount() {
+    this.unsubscribe = store.subscribe(() => {
+      // console.log("Inside RouterOutlet subscription", store.getState());
+      const loggedInUser = store.getState().sessionReducer;
+      if (!isEqual(this.state.loggedInUser, loggedInUser)) {
+        this.setState({
+          loggedInUser
+        });
+      }
+    });
+  }
+  componentWillUnmount() {
+    this.unsubscribe();
+  }
+
   authenticateRoute = route => {
-    const { loggedInUser } = this.props;
+    const { loggedInUser } = this.state;
     if (route.loginRequired && !loggedInUser) {
       return AUTHENTICATION_RESULTS.REDIRECT_TO_LOGIN;
     }
@@ -30,7 +54,11 @@ class RouterOutlet extends Component {
   };
 
   render() {
+    // console.log(this.props);
     const { routes, pageNotFound } = this.props;
+    // const { loggedInUser } = this.state;
+    // console.log(this.props);
+    // console.log("loggedInUser", loggedInUser);
     return (
       <Switch>
         {routes.map((route, index) => (
@@ -40,6 +68,7 @@ class RouterOutlet extends Component {
             path={route.path}
             render={() => {
               const authResult = this.authenticateRoute(route);
+              // console.log(route, loggedInUser, authResult);
               switch (authResult) {
                 case AUTHENTICATION_RESULTS.VALID:
                   return React.createElement(route.component);
@@ -57,10 +86,13 @@ class RouterOutlet extends Component {
   }
 }
 
-const mapStateToProps = state => () => {
-  return {
-    loggedInUser: state.sessionReducer
-  };
-};
+export default RouterOutlet;
 
-export default connect(mapStateToProps)(RouterOutlet);
+// const mapStateToProps = state => () => {
+//   // console.log(state);
+//   return {
+//     loggedInUser: state.sessionReducer
+//   };
+// };
+
+// export default connect(mapStateToProps)(RouterOutlet);

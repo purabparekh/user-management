@@ -6,6 +6,7 @@ import * as storage from "redux-storage";
 import sessionReducer from "./reducers/session/sessionReducer";
 import userReducer from "./reducers/user/userReducer";
 import { users } from "./services/UserService";
+import thunk from "redux-thunk";
 // import { LOAD } from "redux-storage";
 
 export const INITIAL_STATE = {
@@ -16,6 +17,7 @@ export const INITIAL_STATE = {
 };
 
 function storageAwareReducer(state = false, action) {
+  // console.log(state, action);
   switch (action.type) {
     case "LOAD":
       return true;
@@ -34,7 +36,9 @@ const rootReducer = combineReducers({
 const reducer = storage.reducer(rootReducer);
 const engine = createEngine("quisqueya");
 const middleware = storage.createMiddleware(engine);
-const createStoreWithMiddleware = applyMiddleware(middleware)(createStore);
+const createStoreWithMiddleware = applyMiddleware(thunk)(
+  applyMiddleware(middleware)(createStore)
+);
 
 const store = createStoreWithMiddleware(
   reducer,
@@ -42,13 +46,13 @@ const store = createStoreWithMiddleware(
     sessionReducer: INITIAL_STATE.loggedInUser,
     userReducer: INITIAL_STATE.users,
     storageAwareReducer: INITIAL_STATE.storeLoaded
-  }
-  // INITIAL_STATE
-  // devToolsEnhancer
+  },
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 const load = storage.createLoader(engine);
 load(store)
   .then(() => {
+    // console.log("Store loaded");
     store.dispatch({ type: "LOAD" });
   })
   // .then(newState => console.log("Loaded state:", newState))

@@ -21,6 +21,7 @@ import PageTitle from "../common/PageTitle";
 
 import { connect } from "react-redux";
 import {
+  getUsers,
   addUser,
   deleteUser,
   updateUser
@@ -38,6 +39,10 @@ class UserList extends Component {
       isAddUserModalOpen: false,
       isUserInfoVisible: false
     };
+  }
+
+  componentDidMount() {
+    // this.props.getUsers();
   }
 
   handleChangePage = (event, page) => {
@@ -239,6 +244,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  getUsers: () => dispatch(getUsers()),
   addUser: payload => dispatch(addUser(payload)),
   deleteUser: payload => dispatch(deleteUser(payload)),
   updateUser: payload => dispatch(updateUser(payload))

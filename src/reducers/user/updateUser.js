@@ -2,7 +2,7 @@ import USER_ACTION_TYPES from "../../actions/user/actionTypes/actionTypes";
 import User from "../../models/User";
 
 export default (state = [], action) => {
-  console.log(state, action);
+  // console.log(state, action);
   switch (action.type) {
     case USER_ACTION_TYPES.UPDATE_USER:
       const modifiedUser = action.payload;

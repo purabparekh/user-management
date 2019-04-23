@@ -1,8 +1,8 @@
 import User from "../models/User";
 import { ROLES } from "../constants/roles";
 
-export const defaultImageUrl = "http://lorempixel.com/200/200/";
-// export const defaultImageUrl = "https://picsum.photos/200?random";
+// export const defaultImageUrl = "http://lorempixel.com/200/200/";
+export const defaultImageUrl = "https://picsum.photos/200?random";
 
 export const users = [
   new User({

@@ -17,17 +17,17 @@ export const routes = [
     loginRequired: true,
     accessibleTo: "*"
   },
-  {
-    path: "/users",
-    name: "Users",
-    icon: <i className="material-icons">people</i>,
-    renderOnScreen: false,
-    exactMatch: true,
-    component: UserList,
-    activeClassName: "active",
-    loginRequired: true,
-    accessibleTo: "*"
-  },
+  // {
+  //   path: "/users",
+  //   name: "Users",
+  //   icon: <i className="material-icons">people</i>,
+  //   renderOnScreen: false,
+  //   exactMatch: true,
+  //   component: UserList,
+  //   activeClassName: "active",
+  //   loginRequired: true,
+  //   accessibleTo: "*"
+  // },
   {
     path: "/placeholder",
     name: "Placeholder",
